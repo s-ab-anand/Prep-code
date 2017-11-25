@@ -12,6 +12,12 @@ In brute force method, you place the function call f(n) = f(n-1) + f(n-2).
 This recursive routine creates a binary tree so the time complexity turns out
 to be O(2^n).
 */
+/*
+Space complexity discussion: O(n). The approach used in bottom to top.
+In brute force method, you place the function call f(n) = f(n-1) + f(n-2).
+This recursive routine creates a binary tree so the time complexity turns out
+to be O(2^n).
+*/
 double fib(int num)
 {
   //using long instead of int
