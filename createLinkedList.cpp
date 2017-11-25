@@ -1,5 +1,7 @@
 #include<iostream>
 #include<fstream>
+#include<new>
+#include<cstdlib>
 #include "node.h"
 using namespace std;
 
@@ -14,8 +16,14 @@ class MyLinkedList{
       Node* myNode = new Node();
       myNode->val = val;
       myNode->next = NULL;
-      head = myNode;
-      return head;
+      if (head){
+        myNode->next = head;
+        head = myNode;
+        return head;
+      } else {
+        head = myNode;
+        return head;
+      }
     }
     void printList(){
       struct Node* start;
