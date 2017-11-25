@@ -32,5 +32,6 @@ int main(int argc, char* argv[])
 {
   MyLinkedList myList;
   myList.addNode(1);
+  myList.addNode(2);
   myList.printList();
 }
