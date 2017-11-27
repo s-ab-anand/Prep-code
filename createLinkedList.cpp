@@ -14,6 +14,7 @@ class MyLinkedList{
     MyLinkedList();
     struct Node* addNode(int val);
     struct Node* addNodefromFile(MyLinkedList);
+    int travelList(int counter);
     void printList();
 };
 //member function declarations
@@ -55,6 +56,10 @@ void readinFile(MyLinkedList* obj)
       (*obj).addNode(num);
     }
   }
+}
+
+int getNodeNum(MyLinkedList* obj){
+
 }
 // Main function
 int main(int argc, char* argv[])
