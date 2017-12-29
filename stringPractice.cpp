@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <bitset>
 
 int main()
 {
@@ -13,6 +14,7 @@ int main()
   length charset as they use the 8th bit for some characters. In normal ascii
   8th bit is used for error parity.
   */
+  // Time complexity is O(n); space complexity is O(n)
   std::cout<<"Size of string is "<<name.size()<<" bytes"<<std::endl;
   if (name.size() > 128){
     std::cout<<"Not unique"<<std::endl;
@@ -33,6 +35,8 @@ int main()
       charArr[index] = true;
     }
   }
+  // using only string data structure; time complexity O(n^2), space
+  // complexity O(n)
   std::string orig;
   for (std::string::iterator it = name.begin(); it!= name.end(); ++it){
     std::size_t found = orig.find(*it);
@@ -44,6 +48,26 @@ int main()
     }
   }
   std::cout<<orig<<std::endl;
+
+  // trying with a bit vector assuming only lowercase letters, saves space by a
+  // factor of 8 as we use only one integer. For every char, we shift 1 in the
+  // bit vector by that many positions then 'and' it with checker. If result is
+  // 0 then we 'or' it with the bit vector of shifted 1. Now checker contains 1
+  // at the position of char value. If that value is encountered again, the 'and'
+  // will now produce a result > 1 indicating duplicate.
+  std::cout<<"Now trying bit vector method"<<std::endl;
+  int checker = 0;
+  for (std::string::iterator it = name.begin(); it!= name.end(); ++it){
+    int val = *it - 'a';
+    std::cout<<val<<"\t"<<std::bitset<32>(1<<val)<<"\t"<<std::bitset<32>(checker)<<"\t"<<std::bitset<32>(checker & (1<<val))<<std::endl;
+    if ((checker & (1<<val)) > 0){
+      std::cout<<"Not unique"<<std::endl;
+      break;
+    } else {
+      checker |= (1 << val);
+    }
+
+  }
 
   return 0;
 }
