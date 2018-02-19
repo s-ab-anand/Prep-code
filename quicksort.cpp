@@ -66,7 +66,7 @@ void quicksort(vector<int> &arr, int low, int high)
 {
   if (low < high){
     int p = partition(arr, low, high);
-    cout<<p<<endl;
+    //cout<<p<<endl;
     quicksort(arr, low, p-1);
     quicksort(arr, p+1, high);
   }
@@ -76,9 +76,22 @@ void quicksort2(vector<int> &arr, int low, int high)
 {
   if (low < high){
     int p = partition2(arr, low, high);
-    cout<<p<<endl;
+    //cout<<p<<endl;
     quicksort(arr, low, p-1);
     quicksort(arr, p+1, high);
+  }
+}
+
+void readinFile(vector<int> &obj)
+{
+  ifstream myFile ("int100.txt");
+  string line; int num = 0;
+  if (myFile.is_open()){
+    while(getline(myFile, line, ',')){
+      stringstream sobj(line);
+      sobj >> num;
+      obj.push_back(num);
+    }
   }
 }
 
@@ -86,14 +99,17 @@ int main(int argc, char *argv[])
 {
   vector<int> arr;
   int size, i, elem;
-  cout<<"Enter the size of array"<<endl;
-  cin>>size;
-  for (i = 0; i < size; i++){
-    cout<<"enter the element"<<endl;
-    cin>>elem;
-    arr.push_back(elem);
-  }
-  quicksort(arr, 0, size-1);
+  // cout<<"Enter the size of array"<<endl;
+  // cin>>size;
+  // for (i = 0; i < size; i++){
+  //   cout<<"enter the element"<<endl;
+  //   cin>>elem;
+  //   arr.push_back(elem);
+  // }
+
+  readinFile(arr);
+  size = arr.size();
+  quicksort2(arr, 0, size-1);
   for (i = 0; i < size; i++){
     cout<<arr.at(i)<<"\t";
   }
