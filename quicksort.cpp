@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <stack>
 
 
 using namespace std;
@@ -82,6 +83,9 @@ void quicksort2(vector<int> &arr, int low, int high)
   }
 }
 
+void quicksortIter(std::vector<int> v, int low, int high){
+
+}
 void readinFile(vector<int> &obj)
 {
   ifstream myFile ("int100.txt");
