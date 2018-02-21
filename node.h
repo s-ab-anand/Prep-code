@@ -1,5 +1,5 @@
-#ifndef STUDENT_H
-#define STUDENT_H
+#ifndef NODE_H
+#define NODE_H
 #endif
 
 struct Node{

@@ -5,6 +5,8 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <stack>
+
 
 using namespace std;
 // Chose a pivot element. It may be the last, the median or the first element.
@@ -59,14 +61,41 @@ is O(n). quicksort function does partition on every subarray left and right of
 the pivot. Assuming equal elements on either sides of pivot, we need 2*O(lg n)
 calls for partition function so total time complexity would be 2*O(nlogn) =
 O(nlogn). No extra space needed so space complexity is O(1) i.e. inplace.
+Quicksort always degrades to O(n^2) when input array is sorted
 */
 void quicksort(vector<int> &arr, int low, int high)
 {
   if (low < high){
-    int p = partition2(arr, low, high);
-    cout<<p<<endl;
+    int p = partition(arr, low, high);
+    //cout<<p<<endl;
     quicksort(arr, low, p-1);
     quicksort(arr, p+1, high);
+  }
+}
+
+void quicksort2(vector<int> &arr, int low, int high)
+{
+  if (low < high){
+    int p = partition2(arr, low, high);
+    //cout<<p<<endl;
+    quicksort(arr, low, p-1);
+    quicksort(arr, p+1, high);
+  }
+}
+
+void quicksortIter(std::vector<int> v, int low, int high){
+
+}
+void readinFile(vector<int> &obj)
+{
+  ifstream myFile ("int100.txt");
+  string line; int num = 0;
+  if (myFile.is_open()){
+    while(getline(myFile, line, ',')){
+      stringstream sobj(line);
+      sobj >> num;
+      obj.push_back(num);
+    }
   }
 }
 
@@ -74,14 +103,17 @@ int main(int argc, char *argv[])
 {
   vector<int> arr;
   int size, i, elem;
-  cout<<"Enter the size of array"<<endl;
-  cin>>size;
-  for (i = 0; i < size; i++){
-    cout<<"enter the element"<<endl;
-    cin>>elem;
-    arr.push_back(elem);
-  }
-  quicksort(arr, 0, size-1);
+  // cout<<"Enter the size of array"<<endl;
+  // cin>>size;
+  // for (i = 0; i < size; i++){
+  //   cout<<"enter the element"<<endl;
+  //   cin>>elem;
+  //   arr.push_back(elem);
+  // }
+
+  readinFile(arr);
+  size = arr.size();
+  quicksort2(arr, 0, size-1);
   for (i = 0; i < size; i++){
     cout<<arr.at(i)<<"\t";
   }

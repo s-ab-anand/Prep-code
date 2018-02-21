@@ -145,6 +145,17 @@ void newprintList(struct Node* list1){
   }
   cout<<"\n";
 }
+
+void reversePrint(struct Node* list)
+{
+  if (list->next == NULL){
+    cout<<list->val<<"\t";
+  } else{
+    reversePrint(list->next);
+    cout<<list->val<<"\t";
+  }
+
+}
 // Main function
 int main(int argc, char* argv[])
 {
@@ -155,18 +166,18 @@ int main(int argc, char* argv[])
   // creating a list of 100 nodes
   readinFile(&myList1);
   //myList.printList();
-  //newprintList(myList1.head);
+  newprintList(myList1.head);
   // values of the first, second and third quaters of the list
 //  cout<<getNodeNum(&myList, 25)<<"\n";
 //  cout<<getNodeNum(&myList, 50)<<"\n";
 //  cout<<getNodeNum(&myList, 100)<<"\n";
-
+  cout<<"Printing reverse\n";
   //newprintList(reverseLinkedList(myList1.head));
   MyLinkedList myList2;
   readinFile(&myList2);
   struct Node* head2 = reverseLinkedList(myList2.head);
-  cout<< equalLinkedList(myList1.head, head2)<<"\n";
-
+  //cout<< equalLinkedList(myList1.head, head2)<<"\n";
+  reversePrint(head2);
   // search for a value in the linked list
 
 }
