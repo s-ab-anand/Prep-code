@@ -84,6 +84,10 @@ void quicksort2(vector<int> &arr, int low, int high)
 }
 
 void quicksortIter(std::vector<int> v, int low, int high){
+  stack<int> auxStk;
+  auxStk.push(low);
+  auxStk.push(high);
+  while ()
 
 }
 void readinFile(vector<int> &obj)
