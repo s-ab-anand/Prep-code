@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -47,6 +48,31 @@ void mergeSort(std::vector<int> &v, int stIndx, int eIndx){
   }
 }
 
+void mergeIter(std::vector<int> &v, int stIndx, int eIndx){
+  stack<int> s;
+  stack<int> t;
+  s.push(stIndx); s.push(eIndx);
+  do{
+    int ee = s.top(); s.pop();
+    int ss = s.top(); s.pop();
+    int md = (ss+ee)/2;
+    t.push(ss); t.push(md); t.push(ee);
+    if (md > ss){
+      s.push(ss); s.push(md);
+    }
+    if (md+1 < ee){
+      s.push(md+1); s.push(ee);
+    }
+  }while(!s.empty());
+
+  while (!t.empty()){
+    int ed = t.top(); t.pop();
+    int md = t.top(); t.pop();
+    int sd = t.top(); t.pop();
+    merge(v, sd, md, ed);
+  }
+}
+
 void readinFile(vector<int> &obj)
 {
   ifstream myFile ("int100.txt");
@@ -75,7 +101,9 @@ int main(int argc, char *argv[])
   readinFile(arr);
   sizeArr = arr.size();
   cout<<sizeArr<<endl;
-  mergeSort(arr, 0, sizeArr-1);
+  //mergeSort(arr, 0, sizeArr-1);
+  mergeIter(arr, 0, sizeArr-1);
+
   for (i = 0; i < sizeArr; i++){
     cout<<arr.at(i)<<"\t";
   }
